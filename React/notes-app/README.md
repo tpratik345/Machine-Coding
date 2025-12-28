@@ -1,5 +1,5 @@
 ## Functional Requirement
-1. Render the data in for of sticky notes
+1. Render the data in for sticky notes
 2. Drag & Drop
 3. No intersection of notes
 4. Reset on intersection
