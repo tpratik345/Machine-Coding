@@ -8,3 +8,4 @@
 ## Non-Functional Requirement
 1. Rearrangement
 2. Location should persist
+3. Enter btn should work as add btn
