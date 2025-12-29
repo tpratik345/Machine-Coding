@@ -1,16 +1,16 @@
-# React + Vite
+## Functional Requirement
+1. User can input Hours, Minutes, Seconds
+2. Should normalize time values exceeding valid ranges
+3. Hours, Minutes, Seconds fields should be editable
+4. Start button should start the timer
+5. Start button changes to Pause button after start
+6. Pause button changes to Coninue button after pause
+7. Reset button should reset the counter
+8. Timer stops at 00:00:00
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Non-Functional Requirement
+1. Timer accuracy must be within 1 second
+2. Performance
+3. Input validation
+4. Handle Edge Cases
+5. Prevent Negative Values
