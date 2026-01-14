@@ -1,30 +1,65 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.title {
+  font-size: 50px;
 }
 
 .time, .buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.hours, .minutes, .seconds {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 15px;
+.time-labels, .time-inputs {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0;
 }
 
 button {
-    width: 200px;
-    margin: 0 20px;
-    padding: 20px;
+  width: 200px;
+  margin: 0 20px;
+  padding: 20px;
+}
+
+.time-label {
+  width: 100px;
+}
+
+.time-inputs-time {
+  border: none;
+  background: none;
+  font-size: 40px;
+  outline: none;
+  width: 50px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+  margin: none;
+}
+
+.start {
+  background-color: green;
+}
+
+.stop {
+  background-color: red;
+}
+
+.continue {
+  background-color: blueviolet;
+}
+
+.reset {
+  background-color: cadetblue;
 }
