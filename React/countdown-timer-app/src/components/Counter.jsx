@@ -1,91 +1,82 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './Counter.css'
 
 function Counter() {
-  const [timerValue, setTimerValue] = useState();
-  const [hour, setHour] = useState('00');
-  const [mins, setMins] = useState('00');
-  const [secs, setSecs] = useState('00');
+  const timerRef = useRef();
+  const [totalSeconds, setTotalSeconds] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const [inputHour, setInputHour] = useState('00');
+  const [inputMins, setInputMins] = useState('00');
+  const [inputSecs, setInputSecs] = useState('00');
+
   const [showBtn, setShowBtn] = useState({ start: true, continue: false, stop: false });
 
-  function handleReset() {
-    setHour('00');
-    setMins('00');
-    setSecs('00');
-    setShowBtn({ start: true, continue: false, stop: false });
-    stopInterval();
-  }
+  const hours = Math.floor(totalSeconds / 3600);
+  const mins = Math.floor((totalSeconds % 3600) / 60);
+  const secs = totalSeconds % 60;
+
+  const displayHour = hours < 10 ? `0${hours}` : hours.toString();
+  const displayMins = mins < 10 ? `0${mins}` : mins.toString();
+  const displaySecs = secs < 10 ? `0${secs}` : secs.toString();
 
   function timer() {
-    console.log(hour, mins, secs)
-    if (hour === '00' && mins === '00' && secs === '00') {
-      console.log('here');
-      handleReset();
-    } else if (secs !== '00') {
-      setSecs(prevSecs => {
-        if (prevSecs === '00') {
-          // handleReset();
-          return '00';
-        }
-
-        let intValue = parseInt(prevSecs, 10) - 1;
-
-        if (intValue < 0) return '00';
-
-        return intValue < 10 ? `0${intValue}` : intValue.toString();
-      });
-    } else if (mins !== '00' && secs === '00') {
-      setMins(prevMins => {
-        if (prevMins === '00') {
-          return '00';
-        }
-
-        let intValue = parseInt(prevMins, 10) - 1;
-
-        if (intValue < 0) return '00';
-
-        return intValue < 10 ? `0${intValue}` : intValue.toString();
-      });
-    } else if (hour !== '00' && mins === '00' && secs === '00') {
-      setHour(prevHour => {
-        if (prevHour === '00') {
-          return '00';
-        }
-
-        let intValue = parseInt(prevHour, 10) - 1;
-
-        if (intValue < 0) return '00';
-
-        return intValue < 10 ? `0${intValue}` : intValue.toString();
-      });
-    }
+    setTotalSeconds(prev => {
+      if (prev < 1) {
+        setShowBtn({ start: true, continue: false, stop: false });
+        stopInterval();
+        setIsRunning(false);
+        return 0;
+      }
+      return prev - 1;
+    });
   }
 
   function startInterval() {
-    const id = setInterval(timer, 1000);
-    setTimerValue(id);
+    timerRef.current = setInterval(timer, 1000);;
   }
 
   function stopInterval() {
-    console.log(timerValue)
-    clearInterval(timerValue);
+    clearInterval(timerRef.current);
   }
 
   function handleStart() {
-    if (hour === '00' && mins === '00' && secs === '00') return;
+    const total = parseInt(inputHour, 10) * 3600 +
+      parseInt(inputMins, 10) * 60 +
+      parseInt(inputSecs, 10);
 
+    if (total === 0) return;
+
+    setTotalSeconds(total);
     startInterval();
-
-    setShowBtn({ start: false, continue: false, stop: true });
-  }
-
-  function handleContinue() {
+    setIsRunning(true);
     setShowBtn({ start: false, continue: false, stop: true });
   }
 
   function handleStop() {
+    stopInterval();
+    setIsRunning(false);
     setShowBtn({ start: false, continue: true, stop: false });
   }
+
+  function handleContinue() {
+    startInterval();
+    setIsRunning(true);
+    setShowBtn({ start: false, continue: false, stop: true });
+  }
+
+  function handleReset() {
+    stopInterval();
+    setTotalSeconds(0);
+    setIsRunning(false);
+    setInputHour('00');
+    setInputMins('00');
+    setInputSecs('00');
+    setShowBtn({ start: true, continue: false, stop: false });
+  }
+
+  const displayValues = isRunning || totalSeconds > 0
+    ? { hour: displayHour, mins: displayMins, secs: displaySecs }
+    : { hour: inputHour, mins: inputMins, secs: inputSecs };
 
   return (
     <>
@@ -104,8 +95,8 @@ function Counter() {
               maxLength={2}
               placeholder='00'
               className='time-inputs-time input-hour'
-              value={hour}
-              onChange={(e) => setHour(e.target.value)}
+              value={displayValues.hour}
+              onChange={(e) => setInputHour(e.target.value)}
               onInput={(e) => { e.target.value = e.target.value.slice(0, 2) }}
             />
             <p className='time-inputs-colon'>:</p>
@@ -114,8 +105,8 @@ function Counter() {
               maxLength={2}
               placeholder='00'
               className='time-inputs-time input-minutes'
-              value={mins}
-              onChange={(e) => setMins(e.target.value)}
+              value={displayValues.mins}
+              onChange={(e) => setInputMins(e.target.value)}
               onInput={(e) => { e.target.value = e.target.value.slice(0, 2) }}
             />
             <p className='time-inputs-colon'>:</p>
@@ -123,8 +114,8 @@ function Counter() {
               type='text'
               maxLength={2}
               placeholder='00'
-              value={secs}
-              onChange={(e) => setSecs(e.target.value)}
+              value={displayValues.secs}
+              onChange={(e) => setInputSecs(e.target.value)}
               className='time-inputs-time input-seconds'
               onInput={(e) => { e.target.value = e.target.value.slice(0, 2) }}
             />
@@ -134,8 +125,7 @@ function Counter() {
             {showBtn.start && <button className='start' onClick={handleStart}>Start</button>}
             {showBtn.continue && <button className='continue' onClick={handleContinue}>Continue</button>}
             {showBtn.stop && <button className='stop' onClick={handleStop}>Stop</button>}
-            <button className='reset' onClick={handleReset}>Reset</button>
-          </div>
+            <button className='reset' onClick={handleReset}>Reset</button> </div>
         </div>
       </div>
     </>
