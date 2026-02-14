@@ -8,4 +8,8 @@
 7. Customization -> Text, Duration, Animation, Position
 
 ## Non-Functional Requirement
-1.
+1. Perfomance
+2. Accesiblity
+3. User Experience
+4. Compatibility
+5. Scalability
