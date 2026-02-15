@@ -1,0 +1,15 @@
+.container {
+    font-size: 50px;
+}
+
+.star {
+    cursor: pointer;
+}
+
+.hover {
+    color: rgb(240, 198, 80)
+}
+
+.active {
+    color: rgb(252, 224, 15);
+}
