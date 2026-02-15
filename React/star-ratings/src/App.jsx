@@ -5,11 +5,14 @@ import './App.css'
 import StarRatings from './components/StarRatings'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  function handleSelectedRatings(value) {
+    console.log(value)
+  }
 
   return (
     <>
-      <StarRatings size={5} />
+      <StarRatings size={10} handleSelectedRatings={handleSelectedRatings}/>
     </>
   )
 }
