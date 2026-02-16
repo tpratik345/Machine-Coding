@@ -13,7 +13,6 @@ function ToastComponent() {
         setType(value)
         triggerToast({
             type:value,
-            position,
             message:'This is a sample toast.',
             duration: 3000
         })

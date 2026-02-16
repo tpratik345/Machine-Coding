@@ -4,25 +4,28 @@ import type { PositionType } from "../types/toast.types";
 
 type ToastProps = React.ComponentProps<typeof Toast>
 
-// type ToastList = ToastProps & {
-//   id: number
-// }[]
+type ToastList = ToastProps & {
+  id: number
+};
 
 function useToast(position: PositionType = 'top-right') {
-  const [toastProps, setToastProps] = useState<ToastProps | null>(null);
-  let timer: number;
+  const [toastList, setToastList] = useState<ToastList[]>([]);
 
   const triggerToast = useCallback((toast: ToastProps) => {
-    clearTimeout(timer)
-    setToastProps(toast)
-    timer = setTimeout(() => {
-      setToastProps(null);
-    }, toast.duration ?? 500)
+    const id = Date.now();
+    const newToast = {...toast, id}
+    setToastList((prev) => [...prev, newToast])
   }, [])
 
-  const RenderToast = toastProps ? (
-    <div>
-      <Toast {...toastProps} />
+  const closeToast = useCallback((id: number) => {
+    setToastList((prev) => prev?.filter(toast => toast.id !== id));
+  }, [])
+
+  const RenderToast = toastList.length ? (
+    <div className={`toast-container ${position}`}>
+      { toastList?.map((toast) => {
+        return <Toast key={toast.id} {...toast} onClose={() => closeToast(toast.id)} />
+      })}
     </div>
   ) : <></>
 
