@@ -1,0 +1,45 @@
+/* .options-container {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    padding: 10px 5px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    font-size: 30px;
+    width: 100%;
+    cursor: pointer;
+
+} */
+
+.container {
+    font-size: 20px;
+}
+
+button {
+    margin: 5px;
+    width: 300px;
+}
+
+select {
+  appearance: base-select;
+  background-color: aliceblue;
+  color: black;
+  padding: 10px;
+  margin: 20px;
+}
+
+select::picker(select) {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
