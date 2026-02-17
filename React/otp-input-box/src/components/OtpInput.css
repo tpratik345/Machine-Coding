@@ -1,0 +1,14 @@
+.input-container input {
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+    margin: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+  margin: none;
+}
