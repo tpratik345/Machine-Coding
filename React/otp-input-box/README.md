@@ -15,5 +15,5 @@
 ## Non-Functional Requirements
 1. Performance
 2. Security
-3. Accessibility (ARAI Labels)
+3. Accessibility (ARIA Labels)
 4. Tab navigation
