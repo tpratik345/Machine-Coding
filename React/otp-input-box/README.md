@@ -1,16 +1,19 @@
-# React + Vite
+## Functional Requirements
+1. Dynamic
+2. Should auto-focus to next input box if current if filled
+3. Should work for back space
+4. No Alphabets
+5. Paste support
+6. Mobile numeric support
+7. Trying to replace existing digit
+8. Auto select existing values on focus
+9. Disbale submit btn until the opt is complete
+10. Timer
+11. Clear all inputs option
+12. Keyboard navigation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Non-Functional Requirements
+1. Performance
+2. Security
+3. Accessibility (ARAI Labels)
+4. Tab navigation
