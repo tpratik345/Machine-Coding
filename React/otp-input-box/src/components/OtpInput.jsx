@@ -4,6 +4,7 @@ import './OtpInput.css';
 function OtpInput({ size = 6 }) {
     const [inputArray, setInputArray] = useState(new Array(size).fill(''))
     const refArr = useRef([]);
+    const [disabled, setDisabled] = useState(true)
 
     function handleSubmit() {
         console.log(inputArray)
@@ -21,6 +22,20 @@ function OtpInput({ size = 6 }) {
         if (refArr && refArr?.current)
             refArr?.current[0]?.focus();
     }, [])
+
+    useEffect(() => {
+        // let flag = true;
+        // for(const i in inputArray) {
+        //     const input = inputArray[i];
+        //     // console.log(input)
+        //     if(input.trim() === '') {
+        //         flag = false;
+        //         break;
+        //     }
+        // }        
+        let flag = inputArray.some((value) => value==='')
+        setDisabled(flag)
+    }, [inputArray])
 
     function handleOnKeyDown(e, index) {
         if (!e.target.value && e.key === 'Backspace') {
@@ -50,7 +65,7 @@ function OtpInput({ size = 6 }) {
                     })
                 }
             </div>
-            <button onClick={handleSubmit}>Submit</button>
+            <button disabled={disabled} onClick={handleSubmit}>Submit</button>
         </div>
     )
 }
