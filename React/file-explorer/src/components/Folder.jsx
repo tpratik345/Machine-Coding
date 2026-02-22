@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { AiOutlineEdit, AiOutlineFileAdd, AiOutlineFolderAdd, AiOutlineDelete } from "react-icons/ai";
 import './Folder.css'
 
 function Folder({ folderData, handleInsetNode }) {
@@ -22,14 +23,22 @@ function Folder({ folderData, handleInsetNode }) {
     }
   }
 
+  function handleEdit(e) {}
+
+  function handleDelete(e) {}
+
   if (folderData.isFolder) {
     return (
       <div style={{ marginTop: 5 }}>
         <div className='folder' onClick={() => setExpand(!expand)}>
           <span>📁 {folderData.name}</span>
-          <div>
-            <button onClick={(e) => handleClick(e, true)}>Folder +</button>
-            <button onClick={(e) => handleClick(e, false)}>File +</button>
+          <div className='actions-container'>
+            <AiOutlineEdit onClick={(e) => handleEdit(e)} />
+            <AiOutlineFolderAdd onClick={(e) => handleClick(e, true)} />
+            <AiOutlineFileAdd onClick={(e) => handleClick(e, false)} />
+            <AiOutlineDelete onClick={(e) => handleDelete(e)} />
+            {/* <button onClick={(e) => handleClick(e, true)}>Folder +</button>
+            <button onClick={(e) => handleClick(e, false)}>File +</button> */}
           </div>
         </div>
         <div style={{ display: expand ? 'block' : 'none', paddingLeft: 20 }}>

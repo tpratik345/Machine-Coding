@@ -3,6 +3,7 @@
     background-color: rgb(233, 233, 233);
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 3px;
     width: 300px;
     cursor: pointer;
@@ -47,4 +48,13 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+}
+
+.actions-container {
+    font-size: 27px;
+}
+
+.actions-container * {
+    margin: 0 5px;
+    /* padding: 5px; */
 }
