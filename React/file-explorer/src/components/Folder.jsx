@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Folder.css'
 
-function Folder({ folderData }) {
+function Folder({ folderData, handleInsetNode }) {
   const [expand, setExpand] = useState(false);
   const [showInput, setShowInput] = useState({
     visible: false,
@@ -14,9 +14,11 @@ function Folder({ folderData }) {
     setShowInput({ visible: true, folder: isFolder })
   }
 
-  function onAddFolder(e) {
+  function onAddFolder(e, folderId) {
+    console.log(e.target.value)
     if (e.key === 'Enter' && e.target.value) {
       setShowInput({ ...showInput, visible: false })
+      handleInsetNode(folderId, e.target.value, showInput.folder)
     }
   }
 
@@ -39,15 +41,13 @@ function Folder({ folderData }) {
                 className='input'
                 autoFocus
                 onBlur={() => setShowInput({ visible: false, isFolder: null })}
-                onKeyDown={onAddFolder}
+                onKeyDown={(e) => onAddFolder(e, folderData.id)}
               />
             </div>
           }
-          {
-            folderData.items.map((item) => {
-              // if (item.isFolder) {
-              return <Folder key={item.id} folderData={item} />
-              // } 
+          { 
+            folderData?.items?.map((item) => {
+              return <Folder key={item.id} folderData={item} handleInsetNode={handleInsetNode} />
             })
           }
         </div>
