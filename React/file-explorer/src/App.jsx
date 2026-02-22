@@ -1,10 +1,11 @@
 import './App.css'
 import Folder from './components/Folder'
+import folderData from './data/folderData'
 
 function App() {
   return (
     <>
-      <Folder />
+      <Folder folderData={folderData}/>
     </>
   )
 }
