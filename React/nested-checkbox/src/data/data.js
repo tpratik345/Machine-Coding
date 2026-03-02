@@ -32,5 +32,23 @@ export const checkBoxData = [
                 ]
             }
         ]
+    },
+    {
+        id: 8,
+        name: 'Tropical',
+        children: [
+            {
+                id: 9,
+                name: 'Mango',
+            },
+            {
+                id: 10,
+                name: 'Banana'
+            }
+        ]
+    },
+    {
+        id: 11,
+        name: 'Apple'
     }
 ]

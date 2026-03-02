@@ -1,0 +1,13 @@
+/* .checkbox_container {
+    box-sizing: border-box;
+    height: auto;
+    width: 500px;
+    border-radius: 10px;
+    background-color: #696969;
+} */
+
+
+input[type="checkbox"] {  
+  height: 25px;
+  width: 25px;
+}
