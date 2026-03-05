@@ -1,17 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Carousel from './components/Carousel'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const slides = [
+    'https://i.ibb.co/ncrXc2V/1.png',
+    'https://i.ibb.co/B3s7v4h/2.png',
+    'https://i.ibb.co/XXR8kzF/3.png',
+    'https://i.ibb.co/yg7BSdM/4.png',
+  ]
+
 
   return (
-    <>
-      <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-    </>
+    <div className='max-w-lg'>
+      <Carousel>
+        {slides.map((s, i) => (
+          <img key={i} src={s} />
+        ))}
+      </Carousel>
+    </div>
   )
 }
 
