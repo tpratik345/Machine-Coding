@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './NestedCheckbox.css'
+import CheckboxNode from './CheckboxNode';
+import { checkBoxData } from '../data/data';
 
 function NestedCheckbox({ data, checked, setChecked }) {
 
@@ -9,23 +11,27 @@ function NestedCheckbox({ data, checked, setChecked }) {
         setChecked((prev) => {
             const newState = { ...prev, [node.id]: isChecked };
 
-            // const children = node.children;
-            // if (children?.length) {
-            //     children.map((child) => {
-            //         newState = { ...prev, [child.id]: isChecked }
-
-            //     })
-            // }
-
             const updatedChildren = (node) => {
-                node?.children?.length && node?.children.forEach((child) => {
+                if(!node?.children?.length) return;
+                node?.children.forEach((child) => {
                     newState[child.id] = isChecked
-                    if(node?.children?.length) {
+                    if (child?.children?.length) {
                         updatedChildren(child)
                     }
                 })
             }
             updatedChildren(node);
+
+            const verifyChecked = (node) => {
+                if (!node.children) return newState[node.id] || false;
+
+                const allChecked = node.children.every((child) => verifyChecked(child));
+                newState[node.id] = allChecked;
+                return allChecked
+            }
+            checkBoxData.forEach((node) => verifyChecked(node));
+
+
 
             return newState;
         })
@@ -38,15 +44,13 @@ function NestedCheckbox({ data, checked, setChecked }) {
             {
                 data?.map((node) => {
                     return (
-                        <div style={{ paddingLeft: 30 }} key={node.id}>
-                            <input
-                                name={node.name}
-                                type='checkbox'
-                                checked={checked?.[node?.id] || false}
-                                onChange={(e) => handleOnChange(e, node)} />
-                            <label>{node.name}</label>
-                            {node?.children && <NestedCheckbox data={node?.children} checked={checked} setChecked={setChecked} />}
-                        </div>
+                        <CheckboxNode
+                            key={node.id}
+                            node={node}
+                            checked={checked}
+                            handleOnChange={handleOnChange}
+                            setChecked={setChecked}
+                        />
                     )
                 })
             }
