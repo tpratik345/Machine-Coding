@@ -10,10 +10,9 @@ function App() {
     'https://i.ibb.co/yg7BSdM/4.png',
   ]
 
-
   return (
-    <div className='max-w-lg'>
-      <Carousel>
+    <div className='max-w-lg container'>
+      <Carousel autoSlide={false}>
         {slides.map((s, i) => (
           <img key={i} src={s} />
         ))}
