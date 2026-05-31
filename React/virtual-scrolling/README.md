@@ -531,6 +531,66 @@ Memory and rendering cost become nearly constant.
 
 ---
 
+# Further Optimizations (Senior-Level Discussion)
+
+If asked how you'd improve this further:
+
+## 1. Avoid State Updates on Every Scroll
+
+Use `requestAnimationFrame`.
+
+```js
+const ticking = useRef(false);
+
+const handleScroll = (e) => {
+  if (!ticking.current) {
+    requestAnimationFrame(() => {
+      setScrollTop(e.target.scrollTop);
+      ticking.current = false;
+    });
+
+    ticking.current = true;
+  }
+};
+```
+
+## 2. Memoize Rows
+
+```js
+const Row = React.memo(({ user }) => {
+  return <div>{user.name}</div>;
+});
+```
+
+## 3. Dynamic Height Support
+
+For variable row heights:
+
+```js
+[
+ {id:1,height:40},
+ {id:2,height:80},
+ {id:3,height:120}
+]
+```
+
+Maintain:
+
+```js
+prefixSumHeights[]
+```
+
+and use binary search to find visible rows.
+
+This is how libraries like:
+
+`react-window`
+`react-virtualized`
+
+handle dynamic-sized lists efficiently.
+
+---
+
 # Interview Summary
 
 The `UsersList` component handles business logic and data fetching. The API layer encapsulates network requests. The `VirtualScroll` component manages scrolling and rendering, while the `useVirtualScroll` hook contains the virtualization algorithm.
