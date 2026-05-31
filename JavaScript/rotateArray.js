@@ -1,0 +1,7 @@
+function leftRotate() {
+
+}
+
+function rightRotate() {
+    
+}
