@@ -24,6 +24,7 @@ function useVirtualScroll({ items, itemHeight, containerHeight, scrollTop, overs
     console.log('scrollTop', scrollTop)
     console.log('containerHeight', containerHeight)
     console.log('itemHeight', itemHeight)
+
     return {
         startIndex,
         endIndex,
