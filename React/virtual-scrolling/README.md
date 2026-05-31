@@ -554,6 +554,8 @@ const handleScroll = (e) => {
 };
 ```
 
+In React, `requestAnimationFrame` is a built-in global polyfill from the browser used to schedule a callback function to execute immediately after the current frame flushes, right before the next frame is drawn. It is primarily used to achieve `smooth 60 FPS` UI transitions, defer computationally expensive work, or avoid delay spikes when triggering interactions like a ripple effect
+
 ## 2. Memoize Rows
 
 ```js
