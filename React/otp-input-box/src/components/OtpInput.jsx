@@ -43,6 +43,31 @@ function OtpInput({ size = 6 }) {
         }
     }
 
+    function handlePaste(e, index) {
+        e.preventDefault();
+
+        const pastedData = e.clipboardData.getData('text').trim();
+        const values = pastedData.replace(/\D/g, '').split('');
+
+        if (!values.length) return;
+
+        const temp = [...inputs];
+
+        let i = index;
+        let j = 0;
+
+        while (i < size && j < values.length) {
+        temp[i] = values[j];
+        i++;
+        j++;
+        }
+
+        setInputs(temp);
+
+        const nextIndex = Math.min(index + values.length, size - 1);
+        inputRefs.current[nextIndex]?.focus();
+    }
+
     return (
         <div className='container'>
             <div>OTP Login:</div>
@@ -60,6 +85,7 @@ function OtpInput({ size = 6 }) {
                                 onChange={(e) => handleOnChange(e.target.value, index)}
                                 onInput={(e) => e.target.value = e.target.value.slice(0, 1)}
                                 onKeyDown={(e) => handleOnKeyDown(e, index)}
+                                onPaste={(e) => handlePaste(e, index)}
                             />
                         )
                     })
