@@ -12,7 +12,7 @@ Promise.all([promise1, promise2, promise3])
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 
-Promise.myAll = function (promises) {
+Promise.allPolyfill = function (promises) {
     return new Promise((resolve, reject) => {
         let result = [];
 
@@ -37,6 +37,6 @@ Promise.myAll = function (promises) {
 };
 
 
-Promise.myAll([promise1, promise2, promise3])
+Promise.allPolyfill([promise1, promise2, promise3])
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
