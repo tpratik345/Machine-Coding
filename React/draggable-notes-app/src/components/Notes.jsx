@@ -100,7 +100,7 @@ function Notes() {
             let overlap = !(
                 currentNoteRect.right < otherNoteRect.left ||
                 currentNoteRect.left > otherNoteRect.right ||
-                currentNoteRect.button < otherNoteRect.top ||
+                currentNoteRect.bottom < otherNoteRect.top ||
                 currentNoteRect.top > otherNoteRect.bottom
             )
 
